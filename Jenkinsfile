@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label "ambi_slave" }
     stages {
         stage('maven installing') { 
             steps {
