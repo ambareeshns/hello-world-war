@@ -1,16 +1,12 @@
 pipeline {
     agent any
     stages {
-        stage('checkout') { 
+        stage('maven installing') { 
             steps {
-              sh "git clone https://github.com/ambareeshns/hello-world-war"
+              sh "apt install maven"
             }
         }
-stage('build') { 
-            steps {
-              sh "mvn clean package"
-            }
-        }  
+
 
     }
 }
