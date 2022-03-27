@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('maven installing') { 
             steps {
-              sh "apt install maven"
+              sh "sudo apt install maven"
             }
         }
 
