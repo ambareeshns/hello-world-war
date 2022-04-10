@@ -17,7 +17,7 @@ stage('Maven Build') {
         
 stage('Copying docker file to target folder') {     
             steps {
-                sh "cp /root/docker/Dockerfile /var/lib/jenkins/workspace/cicd_pipeline/target"
+                sh "cp /home/ubuntu/Dockerfile /var/lib/jenkins/workspace/cicd_pipeline/target"
 		}
 	}
 stage('Build Docker Image'){
