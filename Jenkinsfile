@@ -15,9 +15,23 @@ stage('Maven Build') {
             }
         }  
         
-/* stage('Copying docker file to target folder') {     
+stage('Copying docker file to target folder') {     
             steps {
-                sh "cp /home/ubuntu/Docke*/
+                sh "cp /home/ubuntu/Dockerfile /var/lib/jenkins/workspace/cicd_pipeline/target"
+		}
+	}
+stage('Build Docker Image'){
+	steps{
+	sh "docker build -t build_cicd:1.0 /var/lib/jenkins/workspace/cicd_pipeline/target"
+	}
+}
+stage('Docker hub login and publish'){
+	steps{
+	sh "eho $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+	sh "docker tag build_cicd:1.0 ambinsdocker/cicdpipeline:1.0"
+	sh "docker push ambinsdocker/cicdpipeline:1.0"
+	}
+}
    }
 }
                
