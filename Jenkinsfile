@@ -1,8 +1,8 @@
 pipeline {
     agent any    
-    environment {
-    DOCKERHUB_CREDENTIALS = credentials('dockerpswd')
-    }
+   // environment {
+   // DOCKERHUB_CREDENTIALS = credentials('dockerpswd')
+  //  }
    stages {
         stage('Checkout') { 
             steps {
@@ -27,7 +27,8 @@ stage('Build Docker Image'){
 }
 stage('Docker hub login and publish'){
 	steps{
-	sh "eho $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+	//sh "eho $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+	sh "docker login -u ambinsdocker -p Iquadtech@2013"
 	sh "docker tag build_cicd:1.0 ambinsdocker/cicdpipeline:1.0"
 	sh "docker push ambinsdocker/cicdpipeline:1.0"
 	}
