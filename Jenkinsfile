@@ -1,12 +1,23 @@
 pipeline {
-    agent { label "ambi_slave" }
-    stages {
-        stage('maven installing') { 
+    agent any    
+    environment {
+    DOCKERHUB_CREDENTIALS = credentials('dockerpasswrord')
+    }
+   stages {
+        stage('Checkout') { 
             steps {
-              sh "sudo apt install maven"
+              sh "git clone https://github.com/ambareeshns/hello-world-war"
             }
         }
-
-
-    }
+stage('Maven Build') { 
+            steps {
+              sh "mvn clean package"
+            }
+        }  
+        
+/* stage('Copying docker file to target folder') {     
+            steps {
+                sh "cp /home/ubuntu/Docke*/
+   }
 }
+               
