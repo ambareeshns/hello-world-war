@@ -34,12 +34,14 @@ stage('Docker hub login and publish'){
 	sh "docker push ambinsdocker/cicdpipeline:1.0"
 	}
 }
-	   stage('deploy'){
-		   steps{
-		sh "docker login -u ambinsdocker -p Iquadtech@2013"
-	        sh "docker pull ambinsdocker/cicdpipeline:1.0"
-		   }
-	   }
+ stage('Pull and Deploy') {  
+  agent { label 'docker' }
+        steps {
+        sh "docker pull ambinsdocker/cicdpipeline:1.0"
+        sh "docker rm -f por"
+        sh "docker run -d -p 8090:8080 --name por ambinsdocker/cicdpipeline:1.0
+             } 
+}    	   
    }
 }
                
