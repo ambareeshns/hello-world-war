@@ -9,21 +9,12 @@ pipeline {
 	      sh "rm -rf hello-world-war"
               sh "git clone https://github.com/ambareeshns/hello-world-war"
             }
-        }
-stage('Maven Build') { 
-            steps {
-              sh "mvn clean package"
-            }
-        }  
-        
-stage('Copying docker file to target folder') {     
-            steps {
-                sh "cp /home/ubuntu/Dockerfile /var/lib/jenkins/workspace/cicd_pipeline/target"
-		}
-	}
-stage('Build Docker Image'){
+        }       
+
+stage('Build'){
 	steps{
-	sh "docker build -t build_cicd:1.0 /var/lib/jenkins/workspace/cicd_pipeline/target"
+	sh "cp /home/ubuntu/Dockerfile /var/lib/jenkins/workspace/cicd_pipeline"
+	sh "docker build -t build_cicd:1.0 /var/lib/jenkins/workspace/cicd_pipeline"
 	}
 }
 stage('Docker hub login and publish'){
@@ -35,7 +26,7 @@ stage('Docker hub login and publish'){
 	}
 }
  stage('Pull and Deploy') {  
-  agent { label 'docker' }
+  agent { label 'ambi_slave' }
         steps {
         sh "docker pull ambinsdocker/cicdpipeline:1.0"
         sh "docker rm -f por"
