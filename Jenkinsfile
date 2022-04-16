@@ -30,7 +30,7 @@ stage('Docker hub login and publish'){
   agent { label 'tomcat' }
         steps {
         sh "docker pull ambinsdocker/cicdpipeline:1.0"
-        sh "docker rm -f por"
+       // sh "docker rm -f por"
         sh "docker run -d -p 8090:8080 --name por ambinsdocker/cicdpipeline:1.0"
              } 
 }    	   
