@@ -27,7 +27,7 @@ stage('Docker hub login and publish'){
 	}
 }
  stage('Pull and Deploy') {  
-  agent { label 'ambi_slave' }
+  agent { label 'tomcat' }
         steps {
         sh "docker pull ambinsdocker/cicdpipeline:1.0"
         sh "docker rm -f por"
