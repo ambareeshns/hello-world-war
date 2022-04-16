@@ -22,7 +22,7 @@ stage('Docker hub login and publish'){
 	steps{
 	//sh "eho $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
 	sh "docker login -u ambinsdocker -p Iquadtech@2013"
-		sh "docker tag build_cicd:${BUILD_NUMBER} ambinsdocker/cicdpipeline:${BUILD_NUMBER}
+		sh "docker tag build_cicd:${BUILD_NUMBER} ambinsdocker/cicdpipeline:${BUILD_NUMBER}"
 	sh "docker push ambinsdocker/cicdpipeline:${BUILD_NUMBER}"
 	}
 }
