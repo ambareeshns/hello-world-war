@@ -13,8 +13,8 @@ pipeline {
 
 stage('Build'){
 	steps{
-	sh "cp /home/ubuntu/Dockerfile /var/lib/jenkins/workspace/cicd_pipeline"
-	sh "docker build -t build_cicd:1.0 /var/lib/jenkins/workspace/cicd_pipeline"
+	//sh "cp /home/ubuntu/Dockerfile /var/lib/jenkins/workspace/cicd_pipeline"
+	sh "docker build -t build_cicd:1.0 /var/lib/jenkins/workspace/cicd_pipeline ."
 	}
 }
 stage('Docker hub login and publish'){
