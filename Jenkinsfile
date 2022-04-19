@@ -26,14 +26,22 @@ stage('Docker hub login and publish'){
 	sh "docker push ambinsdocker/cicdpipeline:${BUILD_NUMBER}"
 	}
 }
- stage('Pull and Deploy') {  
-  agent { label 'tomcat' }
+stage('Deploy') {  
+  agent { label 'kuber' }
         steps {
-        sh "docker pull ambinsdocker/cicdpipeline:${BUILD_NUMBER}"
-        sh "docker rm -f por"
-        sh "docker run -d -p 8090:8080 --name por ambinsdocker/cicdpipeline:${BUILD_NUMBER}"
+        
+        //sh "docker pull anilpu3/cicd-build-docker-repo:${BUILD_NUMBER}"
+        //sh " cd /root "
+        // sh " sed -i '25s/tomcat:latest/tomcat:9.0/Ig' /root/deployment.yml "      
+        sh " kubectl apply -f /root/deployment.yml"
+        sh " kubectl get pod "
+        sh " kubectl get deployment "
+        sh " kubectl get pod "
+        sh " kubectl apply -f /root/tomcat_nodeportsvc.yml "
+sh " kubectl get svc "
+        // sh "docker rm -f port"
+        // sh "docker run -d -p 9090:8080 --name port anilpu3/cicd-build-docker-repo:${BUILD_NUMBER}"
              } 
-}    	   
-   }
+}    
 }
-               
+}
