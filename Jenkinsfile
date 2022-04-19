@@ -11,7 +11,7 @@ pipeline {
             }
         }       
 
-stage('Build'){
+/*stage('Build'){
 	steps{
 	//sh "cp /home/ubuntu/Dockerfile /var/lib/jenkins/workspace/cicd_pipeline"
 	sh "cd /var/lib/jenkins/workspace/cicd_pipeline"
@@ -25,7 +25,7 @@ stage('Docker hub login and publish'){
 		sh "docker tag build_cicd:${BUILD_NUMBER} ambinsdocker/cicdpipeline:${BUILD_NUMBER}"
 	sh "docker push ambinsdocker/cicdpipeline:${BUILD_NUMBER}"
 	}
-}
+}*/
 stage('Deploy') {  
   agent { label 'kuber' }
         steps {
